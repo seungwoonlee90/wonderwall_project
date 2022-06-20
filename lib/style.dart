@@ -6,5 +6,8 @@ var theme = ThemeData(
         elevation: 1,
         titleTextStyle: TextStyle(color: Colors.black, fontSize: 25),
         actionsIconTheme: IconThemeData(color: Colors.black)
+    ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        selectedItemColor : Colors.black
     )
 );

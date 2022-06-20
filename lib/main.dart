@@ -23,7 +23,15 @@ class MyApp extends StatelessWidget {
             onPressed: (){},
             iconSize: 30,
           )],),
-      body: Text("You're my wonderwall")
+      body: Text("You're my wonderwall"),
+      bottomNavigationBar: BottomNavigationBar(
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: 'home'),
+          BottomNavigationBarItem(icon: Icon(Icons.shopping_bag_outlined), label: 'link'),
+        ],
+      ),
     );
   }
 }
