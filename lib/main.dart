@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
+import './style.dart' as style;
 
 void main() {
   runApp(MaterialApp(
-      theme: ThemeData(
-        appBarTheme: AppBarTheme(
-            color : Colors.white,
-            elevation: 1,
-            titleTextStyle: TextStyle(color: Colors.black, fontSize: 25),
-            actionsIconTheme: IconThemeData(color: Colors.black)
-        )
-      ),
+      theme: style.theme,
       home : MyApp())
   );
 }
