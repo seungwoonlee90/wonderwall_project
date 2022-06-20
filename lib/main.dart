@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         showUnselectedLabels: false,
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: 'home'),
-          BottomNavigationBarItem(icon: Icon(Icons.shopping_bag_outlined), label: 'link'),
+          BottomNavigationBarItem(icon: Icon(Icons.airplane_ticket_outlined), label: 'link'),
         ],
       ),
     );
