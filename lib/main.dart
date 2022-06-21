@@ -18,11 +18,15 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   var tab = 0;
+  var data = [];
 
   getData() async {
-    var res = await http.get(Uri.parse('https://pokeapi.co/api/v2/pokemon/ditto'));
+    var res = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts'));
+    var result = jsonDecode(res.body);
     if (res.statusCode == 200) {
-      print(jsonDecode(res.body));
+      setState((){
+        data = result;
+      });
     } else {
       print("error");
     }
@@ -32,7 +36,8 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    getData();
+    var data = getData();
+    print(data);
   }
 
   @override
@@ -47,7 +52,7 @@ class _MyAppState extends State<MyApp> {
             onPressed: (){},
             iconSize: 30,
           )],),
-      body: [Text("You're my wonderwall"), Text("Oh!Lolli")][tab],
+      body: [Oasis(data:data), Text("Oh!Lolli")][tab],
       bottomNavigationBar: BottomNavigationBar(
         showSelectedLabels: false,
         showUnselectedLabels: false,
@@ -62,5 +67,22 @@ class _MyAppState extends State<MyApp> {
         ],
       ),
     );
+  }
+}
+
+class Oasis extends StatelessWidget {
+  const Oasis({Key? key, this.data}) : super(key: key);
+  final data;
+
+  @override
+  Widget build(BuildContext context) {
+
+    if(data.isNotEmpty){
+      return Container(
+          child: Text(data[0]['title']));
+    } else {
+      return Container(
+          child: Text("now loading..."));
+    }
   }
 }
