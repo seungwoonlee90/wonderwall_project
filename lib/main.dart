@@ -19,6 +19,22 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   var tab = 0;
 
+  getData() async {
+    var res = await http.get(Uri.parse('https://pokeapi.co/api/v2/pokemon/ditto'));
+    if (res.statusCode == 200) {
+      print(jsonDecode(res.body));
+    } else {
+      print("error");
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
