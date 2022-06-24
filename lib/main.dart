@@ -76,20 +76,19 @@ class Oasis extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(itemCount: 10, itemBuilder: (c, i){
-      if(data.isNotEmpty){
+    if(data.isNotEmpty){
+      return ListView.builder(itemCount: 10, itemBuilder: (c, i){
         return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children:[
               Text(data[i]['title']),
             ]);
-      } else {
+      });
+    } else {
         return Container(
           child:
             Text("Now Loading...")
         );
       }
-    },
-    );
   }
 }
