@@ -70,18 +70,35 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-class Oasis extends StatelessWidget {
+class Oasis extends StatefulWidget {
   const Oasis({Key? key, this.data}) : super(key: key);
   final data;
+  @override
+  State<Oasis> createState() => _OasisState();
+}
+
+class _OasisState extends State<Oasis> {
+
+  var scroll = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    scroll.addListener(() {
+      if(scroll.position.pixels == scroll.position.maxScrollExtent){
+        //더보기 기능
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    if(data.isNotEmpty){
-      return ListView.builder(itemCount: 10, itemBuilder: (c, i){
+    if(widget.data.isNotEmpty){
+      return ListView.builder(itemCount: 10, controller: scroll, itemBuilder: (c, i){
         return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children:[
-              Text(data[i]['title']),
+              Text("title_${i} is : ${widget.data[i]['title']}"),
             ]);
       });
     } else {
