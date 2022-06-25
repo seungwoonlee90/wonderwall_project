@@ -49,7 +49,12 @@ class _MyAppState extends State<MyApp> {
         actions: [
           IconButton(
             icon: Icon(Icons.add_box_outlined),
-            onPressed: (){},
+            onPressed: (){
+              Navigator.push(context,
+                MaterialPageRoute(builder: (c){
+                  return Text("New Page"); //custom widget
+                }));
+            },
             iconSize: 30,
           )],),
       body: [Oasis(data:data), Text("Oh!Lolli")][tab],
