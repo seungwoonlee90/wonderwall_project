@@ -52,7 +52,7 @@ class _MyAppState extends State<MyApp> {
             onPressed: (){
               Navigator.push(context,
                 MaterialPageRoute(builder: (c){
-                  return Text("New Page"); //custom widget
+                  return Upload(); //custom widget
                 }));
             },
             iconSize: 30,
@@ -112,5 +112,22 @@ class _OasisState extends State<Oasis> {
             Text("Now Loading...")
         );
       }
+  }
+}
+
+class Upload extends StatelessWidget {
+  const Upload({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('upload here!')
+        ],
+      ),
+    );
   }
 }
