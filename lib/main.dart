@@ -125,7 +125,10 @@ class Upload extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('upload here!')
+          Text('upload here!'),
+          IconButton(onPressed: (){
+            Navigator.pop(context);
+          }, icon: Icon(Icons.close))
         ],
       ),
     );
