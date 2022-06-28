@@ -21,6 +21,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   var tab = 0;
   var data = [];
+  var userImage;
 
   getData() async {
     var res = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts'));
@@ -54,9 +55,15 @@ class _MyAppState extends State<MyApp> {
             onPressed: () async{
               var picker = ImagePicker();
               var image = await picker.pickImage(source: ImageSource.gallery);
+              if(image != null) {
+                setState((){
+                  userImage = File(image.path);
+                });
+              }
+
               Navigator.push(context,
                 MaterialPageRoute(builder: (c){
-                  return Upload(); //custom widget
+                  return Upload(userImage : userImage); //custom widget
                 }));
             },
             iconSize: 30,
@@ -120,7 +127,8 @@ class _OasisState extends State<Oasis> {
 }
 
 class Upload extends StatelessWidget {
-  const Upload({Key? key}) : super(key: key);
+  const Upload({Key? key, this.userImage}) : super(key: key);
+  final userImage;
 
   @override
   Widget build(BuildContext context) {
@@ -129,6 +137,7 @@ class Upload extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Image.file(userImage),
           Text('upload here!'),
           IconButton(onPressed: (){
             Navigator.pop(context);
