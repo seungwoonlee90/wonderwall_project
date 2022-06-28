@@ -51,7 +51,9 @@ class _MyAppState extends State<MyApp> {
         actions: [
           IconButton(
             icon: Icon(Icons.add_box_outlined),
-            onPressed: (){
+            onPressed: () async{
+              var picker = ImagePicker();
+              var image = await picker.pickImage(source: ImageSource.gallery);
               Navigator.push(context,
                 MaterialPageRoute(builder: (c){
                   return Upload(); //custom widget
