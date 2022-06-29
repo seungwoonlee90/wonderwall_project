@@ -139,6 +139,7 @@ class Upload extends StatelessWidget {
         children: [
           Image.file(userImage),
           Text('upload here!'),
+          TextField(),
           IconButton(onPressed: (){
             Navigator.pop(context);
           }, icon: Icon(Icons.close))
