@@ -28,7 +28,6 @@ class _MyAppState extends State<MyApp> {
     var result = jsonDecode(res.body);
     if (res.statusCode == 200) {
       setState((){
-        print(result['data']['movies']);
         data = result['data']['movies'];
       });
     } else {
@@ -97,13 +96,20 @@ class Oasis extends StatefulWidget {
 class _OasisState extends State<Oasis> {
 
   var scroll = ScrollController();
+  var itemCount = 5;
 
   @override
   void initState() {
     super.initState();
     scroll.addListener(() {
       if(scroll.position.pixels == scroll.position.maxScrollExtent){
-        //더보기 기능
+        if (itemCount <=17) {
+          setState((){
+            itemCount+=3;
+          });
+        } else {
+          itemCount = 20;
+        }
       }
     });
   }
@@ -111,7 +117,7 @@ class _OasisState extends State<Oasis> {
   @override
   Widget build(BuildContext context) {
     if(widget.data.isNotEmpty){
-      return ListView.builder(itemCount: 5, controller: scroll, itemBuilder: (c, i){
+      return ListView.builder(itemCount: itemCount, controller: scroll, itemBuilder: (c, i){
         return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children:[
