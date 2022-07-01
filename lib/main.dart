@@ -24,11 +24,12 @@ class _MyAppState extends State<MyApp> {
   var userImage;
 
   getData() async {
-    var res = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts'));
+    var res = await http.get(Uri.parse('https://yts.mx/api/v2/list_movies.json'));
     var result = jsonDecode(res.body);
     if (res.statusCode == 200) {
       setState((){
-        data = result;
+        print(result['data']['movies']);
+        data = result['data']['movies'];
       });
     } else {
       print("error");
@@ -110,11 +111,19 @@ class _OasisState extends State<Oasis> {
   @override
   Widget build(BuildContext context) {
     if(widget.data.isNotEmpty){
-      return ListView.builder(itemCount: 10, controller: scroll, itemBuilder: (c, i){
+      return ListView.builder(itemCount: 5, controller: scroll, itemBuilder: (c, i){
         return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children:[
-              Text("title_${i} is : ${widget.data[i]['title']}"),
+              Text("${widget.data[i]['title_long']}"),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children:[
+                  Text("Rating:${widget.data[i]['rating']}"),
+                  Text("Runtime:${widget.data[i]['runtime']}"),
+                  Text("Genres: ${widget.data[i]['genres']}")
+                ]),
+              Image.network("${widget.data[i]['background_image']}")
             ]);
       });
     } else {
