@@ -118,19 +118,25 @@ class _OasisState extends State<Oasis> {
   Widget build(BuildContext context) {
     if(widget.data.isNotEmpty){
       return ListView.builder(itemCount: itemCount, controller: scroll, itemBuilder: (c, i){
-        return Column(
+        return Container(
+          padding: EdgeInsets.all(10.0),
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children:[
-              Text("${widget.data[i]['title_long']}"),
+            children: [
+              Text("${widget.data[i]['title_long']}",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18
+                )),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children:[
-                  Text("Rating:${widget.data[i]['rating']}"),
-                  Text("Runtime:${widget.data[i]['runtime']}"),
-                  Text("Genres: ${widget.data[i]['genres']}")
-                ]),
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children:[
+                    Text("Rating:${widget.data[i]['rating']}/10"),
+                    Text("Runtime:${widget.data[i]['runtime']}min"),
+                    Text("Genres: ${widget.data[i]['genres']}")
+                  ]),
               Image.network("${widget.data[i]['background_image']}")
-            ]);
+            ]));
       });
     } else {
         return Container(
