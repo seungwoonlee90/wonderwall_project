@@ -3,6 +3,8 @@ import './style.dart' as style;
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
 import 'dart:io';
 
 void main() {
@@ -23,6 +25,13 @@ class _MyAppState extends State<MyApp> {
   var data = [];
   var userImage;
 
+  saveData() async {
+    var storage = await SharedPreferences.getInstance();
+    storage.setString('name', 'ethan');
+    var stResult = storage.get('name');
+    print(stResult);
+  }
+
   getData() async {
     var res = await http.get(Uri.parse('https://yts.mx/api/v2/list_movies.json'));
     var result = jsonDecode(res.body);
@@ -39,6 +48,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    saveData();
     var data = getData();
     print(data);
   }
