@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import './style.dart' as style;
 import 'package:http/http.dart' as http;
@@ -141,13 +142,7 @@ class _OasisState extends State<Oasis> {
                     )),
                 onTap: (){
                   Navigator.push(context,
-                    MaterialPageRoute(builder: (c) =>
-                        Text("${widget.data[i]['title_long']}",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18
-                        )
-                        )
+                    MaterialPageRoute(builder: (c) => Info()
                     )
                   );
                 },
@@ -194,6 +189,18 @@ class Upload extends StatelessWidget {
           }, icon: Icon(Icons.close))
         ],
       ),
+    );
+  }
+}
+
+class Info extends StatelessWidget {
+  const Info({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Text("infomation"),
     );
   }
 }
