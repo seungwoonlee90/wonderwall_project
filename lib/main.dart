@@ -133,11 +133,25 @@ class _OasisState extends State<Oasis> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("${widget.data[i]['title_long']}",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18
-                )),
+              GestureDetector(
+                child: Text("${widget.data[i]['title_long']}",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18
+                    )),
+                onTap: (){
+                  Navigator.push(context,
+                    MaterialPageRoute(builder: (c) =>
+                        Text("${widget.data[i]['title_long']}",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18
+                        )
+                        )
+                    )
+                  );
+                },
+              ),
               Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children:[
