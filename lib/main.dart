@@ -10,9 +10,12 @@ import 'dart:io';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MaterialApp(
-      theme: style.theme,
-      home : MyApp())
+  runApp(ChangeNotifierProvider(
+    create: (c) => Store1(),
+    child: MaterialApp(
+        theme: style.theme,
+        home : MyApp()),
+  )
   );
 }
 
@@ -194,14 +197,28 @@ class Upload extends StatelessWidget {
   }
 }
 
+class Store1 extends ChangeNotifier {
+  var name = 'movie title';
+  changeName(){
+    name = 'change state';
+    notifyListeners();
+  }
+}
+
 class Info extends StatelessWidget {
   const Info({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: Text("infomation"),
+      appBar: AppBar(title: Text(context.watch<Store1>().name),),
+      body: Column(
+        children: [
+          ElevatedButton(onPressed: (){
+            context.read<Store1>().changeName();
+          }, child: Text("Button"))
+        ],
+      ),
     );
   }
 }
