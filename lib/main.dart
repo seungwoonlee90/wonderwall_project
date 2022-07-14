@@ -120,10 +120,10 @@ class _OasisState extends State<Oasis> {
       if(scroll.position.pixels == scroll.position.maxScrollExtent){
         if (itemCount <=17) {
           setState((){
-            itemCount+=3;
+            itemCount+=5;
           });
         } else {
-          itemCount = 20;
+          itemCount = 30;
         }
       }
     });
@@ -199,8 +199,16 @@ class Upload extends StatelessWidget {
 
 class Store1 extends ChangeNotifier {
   var name = 'movie title';
-  changeName(){
-    name = 'change state';
+  var fs = false;
+  var num = 0;
+  setFs(){
+    if(fs == false){
+      num++;
+      fs = true;
+    } else {
+      num--;
+      fs=false;
+    }
     notifyListeners();
   }
 }
@@ -212,10 +220,16 @@ class Info extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(context.watch<Store1>().name),),
-      body: Column(
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
+          CircleAvatar(
+            radius: 30,
+            backgroundColor: Colors.grey,
+          ),
+          Text('${context.watch<Store1>().num}'),
           ElevatedButton(onPressed: (){
-            context.read<Store1>().changeName();
+            context.read<Store1>().setFs();
           }, child: Text("Button"))
         ],
       ),
