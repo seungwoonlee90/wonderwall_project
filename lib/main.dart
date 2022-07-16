@@ -220,19 +220,39 @@ class Info extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(context.watch<Store1>().name),),
-      body: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          CircleAvatar(
-            radius: 30,
-            backgroundColor: Colors.grey,
-          ),
-          Text('${context.watch<Store1>().num}'),
-          ElevatedButton(onPressed: (){
-            context.read<Store1>().setFs();
-          }, child: Text("Button"))
-        ],
-      ),
+        body : CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(child: InfoHeader()),
+            SliverGrid(
+                delegate: SliverChildBuilderDelegate(
+                      (c,i) => Container(color : Colors.grey),
+                  childCount: 6,
+                ),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount( crossAxisCount: 3 ))
+          ],
+        )
     );
   }
 }
+
+class InfoHeader extends StatelessWidget {
+  const InfoHeader({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        CircleAvatar(
+          radius: 30,
+          backgroundColor: Colors.grey,
+        ),
+        Text('${context.watch<Store1>().num}'),
+        ElevatedButton(onPressed: (){
+          context.read<Store1>().setFs();
+        }, child: Text("Button"))
+      ],
+    );
+  }
+}
+
