@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'dart:io';
 import 'package:provider/provider.dart';
+import 'notification.dart';
 
 void main() {
   runApp(ChangeNotifierProvider(
@@ -53,6 +54,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    initNotification();
     saveData();
     var data = getData();
     print(data);
@@ -179,7 +181,6 @@ class Upload extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(actions: [
         IconButton(onPressed: (){
-
         }, icon: Icon(Icons.send))
       ],),
       body: Column(
@@ -249,6 +250,7 @@ class InfoHeader extends StatelessWidget {
         ),
         Text('${context.watch<Store1>().num}'),
         ElevatedButton(onPressed: (){
+          showNotification();
           context.read<Store1>().setFs();
         }, child: Text("Button"))
       ],
